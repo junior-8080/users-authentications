@@ -1,10 +1,11 @@
 import jwt from "jsonwebtoken";
 import * as api from "./api.js";
+import {getAccountDeatils} from "../utils/thirdparties.js";
 
 export const authorize = async (req, res, next) => {
-  const token = req.headers['x-access-token'];
+  const token = req.headers['x-api-key'];
   try {
-    let verifiedTokenPayload = await jwt.verify(token, process.env.JWT_SECRET);
+    let verifiedTokenPayload = await getAccountDeatils(token, process.env.JWT_SECRET);
     req.user = verifiedTokenPayload;
     next();
   } catch (error) {

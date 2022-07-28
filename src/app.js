@@ -6,13 +6,12 @@ const PORT = process.env.PORT || 3004;
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import { dbInit } from './utils/dbconnection.js';
-;
 import users from './users/routes.js';
+import auth from './auth/route.js';
 import morgan from 'morgan';
 import logger from './logs/logger.js';
 import swaggerUI from 'swagger-ui-express';
 import swaggerDocument  from "./swagger.json";
-
 
 
 // database initialization.
@@ -24,9 +23,10 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-app.use("/v1/users",users)
+app.use("/v1/users",users);
+app.use("/v1/auth",auth)
 
 // documentation
 app.use("/api-docs",swaggerUI.serve,swaggerUI.setup(swaggerDocument));
 
-export default app;
+app.listen(PORT,()=> {logger.info(`app running on port : ${PORT}`)});

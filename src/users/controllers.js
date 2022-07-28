@@ -1,16 +1,27 @@
 import * as api from "../utils/api.js";
-import { newUser,login } from "./services.js";
+import {createUser,updateUser } from "./services.js";
 
-export const createUser = (req, res) => {
+export const saveUser = (req, res) => {
   const data = req.body;
-  newUser(data)
+  createUser(data)
     .then((response) => api.success(res, response))
     .catch((err) => {
-     return  api.serverErrors(res,err)});
+      console.log(JSON.stringify(err))
+      return api.serverErrors(res, err);
+    });
 };
 
-export const signin = (req, res) => {
+export const editUserDetails = (req, res) => {
   const data = req.body;
-  login(data).then((response) => api.success(res, response))
-  .catch(err => api.serverErrors(res,err))
+
+  updateUser(data)
+    .then((response) => api.success(res, response))
+    .catch((err) => {
+      console.log(JSON.stringify(err))
+      return api.serverErrors(res, err);
+    });
 };
+
+export const fetchUsers = (req, res) => {};
+
+export const fetchUser = (req, res) => {};

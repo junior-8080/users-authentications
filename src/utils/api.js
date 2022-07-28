@@ -14,7 +14,7 @@ export const success = (res, response) => {
       return res.status(400).json(payload);
     case "FORBIDDEN":
       payload.statusCode = 403;
-      return res.status(403).status(payload);
+      return res.status(403).json(payload);
     default:
        res.status(200).json(payload);
   }
@@ -37,9 +37,10 @@ export const serverErrors = (res, error) => {
       return res.status(401).json(payload);
     case "FORBIDDEN":
       payload.statusCode = 403;
-      return res.status(403).status(payload);
+      return res.status(403).json(payload);
     default:
-     payload.message = "Kindly contact aahmedltd@mailinator.com for assistance";
-      return res.json(500).status(payload);
+      payload.status = "Internal Server Error"
+      payload.message = "Kindly contact aahmedltd@mailinator.com for assistance";
+      return res.status(500).json(payload);
   }
 };

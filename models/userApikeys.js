@@ -1,7 +1,9 @@
 import { Sequelize, DataTypes } from "sequelize";
+import {sequelize} from "../src/utils/dbconnection.js"
 const sequelize = new Sequelize();
 
-const userApiKeys = sequelize.define("userApikeys", {
+export const userApiKeys =
+sequelize.define("userApikeys", {
   userId: {
     type: DataTypes.UUID,
     references: {
