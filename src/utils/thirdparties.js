@@ -1,12 +1,12 @@
 import axios from "axios";
 
+let accountBaseUrl = `http://localhost:3001/v1/auth/api-key/`
 export const getAccountDeatils = async (apiKey) => {
   try {
-    const params = `?apiKey=${apiKey}`;
-    const response = await axios(`${accountBaseUrl}${params}`);
-    console.log(response);
+    const response = await axios.get(`${accountBaseUrl}${apiKey}`);
+    return response.data;
   } catch (error) {
-    console.log(error);
-    return error;
+    console.log(error)
+    throw (error);
   }
 };

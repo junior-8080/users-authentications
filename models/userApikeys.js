@@ -1,6 +1,5 @@
 import { Sequelize, DataTypes } from "sequelize";
 import {sequelize} from "../src/utils/dbconnection.js"
-const sequelize = new Sequelize();
 
 export const userApiKeys =
 sequelize.define("userApikeys", {

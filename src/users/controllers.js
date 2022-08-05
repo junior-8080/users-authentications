@@ -6,18 +6,15 @@ export const saveUser = (req, res) => {
   createUser(data)
     .then((response) => api.success(res, response))
     .catch((err) => {
-      console.log(JSON.stringify(err))
       return api.serverErrors(res, err);
     });
 };
 
 export const editUserDetails = (req, res) => {
   const data = req.body;
-
   updateUser(data)
     .then((response) => api.success(res, response))
     .catch((err) => {
-      console.log(JSON.stringify(err))
       return api.serverErrors(res, err);
     });
 };
