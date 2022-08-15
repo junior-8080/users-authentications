@@ -10,7 +10,7 @@
     "up": "npx sequelize db:migrate",
     "down": "npx sequelize-cli db:migrate:undo",
     "start": "node --experimental-json-modules src/app.js",
-    "main": "node src/pp.js"
+    "main": "node --experimental-json-modules src/pp.js"
   },
   "jest": {
     "transform": {
