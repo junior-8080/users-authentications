@@ -6,11 +6,11 @@
   "main": "src/app.js",
   "scripts": {
     "test": "jest --watchAll --detectOpenHandles ",
-    "dev": "nodemon --experimental-json-modules src/app.js",
+    "dev": "nodemon --experimental-specifier-resolution=node src/app.js",
     "up": "npx sequelize db:migrate",
     "down": "npx sequelize-cli db:migrate:undo",
-    "start": "node --experimental-json-modules src/app.js",
-    "main": "node --experimental-json-modules src/pp.js"
+    "start": "node --experimental-specifier-resolution=node src/app.js",
+    "main": "node --experimental-json-modules src/app.js"
   },
   "jest": {
     "transform": {
