@@ -9,7 +9,7 @@ import { dbInit } from './utils/dbconnection.js';
 import users from './users/routes.js';
 import auth from './auth/route.js';
 import morgan from 'morgan';
-import logger from './logs/logger.js';
+// import logger from './logs/logger.js';
 import swaggerUI from 'swagger-ui-express';
 import swaggerDocument  from "./swagger.json";
 
@@ -29,4 +29,4 @@ app.use("/v1/auth",auth)
 // documentation
 app.use("/api-docs",swaggerUI.serve,swaggerUI.setup(swaggerDocument));
 
-app.listen(PORT,()=> {logger.info(`app running on port : ${PORT}`)});
+app.listen(PORT,()=> {console.log(`app running on port : ${PORT}`)});
