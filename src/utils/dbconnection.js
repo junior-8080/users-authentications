@@ -10,10 +10,9 @@ export const sequelize = new Sequelize({
     dialect:process.env.DB_DIALECT,
     dialectOptions: {
       ssl: {
-        require: true,
         rejectUnauthorized: false
-      }
-    }
+      },
+    },
 });
 
 
