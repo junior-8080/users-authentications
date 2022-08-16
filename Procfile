@@ -1,1 +1,1 @@
-web: npx sequelize db:migrate && node --experimental-json-modules  src/app.js
+web: npx sequelize db:migrate
