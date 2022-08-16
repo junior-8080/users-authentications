@@ -1,5 +1,5 @@
 import { Sequelize } from "sequelize";
-import logger from "../logs/logger.js";
+import {logger} from "../logs/logger.js";
 
 export const sequelize = new Sequelize({
     database:process.env.DB_NAME ,

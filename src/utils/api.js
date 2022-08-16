@@ -1,4 +1,4 @@
-import logger from "../logs/logger.js";
+import {logger} from "../logs/logger.js";
 
 export const success = (res, response) => {
   logger.info({statusCode:response.statusCode,status:response.code,message:response.message})
