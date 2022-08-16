@@ -2,7 +2,7 @@ import 'dotenv/config'
 import express from 'express';
 const app = express();
 import cors from 'cors';
-const PORT = process.env.APP_PORT || 3004;
+const PORT = process.env.PORT || 3004;
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import { dbInit } from './utils/dbconnection.js';
