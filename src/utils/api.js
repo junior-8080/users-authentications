@@ -1,7 +1,7 @@
-import {logger} from "../logs/logger.js";
+// import {logger} from "../logs/logger.js";
 
 export const success = (res, response) => {
-  logger.info({statusCode:response.statusCode,status:response.code,message:response.message})
+  console.log({statusCode:response.statusCode,status:response.code,message:response.message})
   const payload = {
     statusCode: 200,
     message: response.message,
@@ -21,7 +21,7 @@ export const success = (res, response) => {
 };
 
 export const serverErrors = (res, error) => {
-  logger.error(error)
+  console.log(error)
   const payload = {
     statusCode: 500,
     message: error.message,

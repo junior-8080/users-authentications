@@ -1,5 +1,5 @@
 import { Sequelize } from "sequelize";
-import {logger} from "../logs/logger.js";
+// import {logger} from "../logs/logger.js";
 
 export const sequelize = new Sequelize({
     database:process.env.DB_NAME ,
@@ -19,7 +19,7 @@ export const sequelize = new Sequelize({
 export const dbInit = () => {
   try {
     sequelize.authenticate();
-    logger.info("Connection established successfully.");
+   console.log("Connection established successfully.");
   } catch (error) {
     console.log(error);
   }

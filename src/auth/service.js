@@ -1,5 +1,5 @@
 import { User } from "../../models/users.js";
-import {logger} from "../logs/logger.js";
+// import {logger} from "../logs/logger.js";
 import { comparePassword, generateToken, verifyToken } from "../utils/utils.js";
 
 export const userSignin = async (payload) => {
