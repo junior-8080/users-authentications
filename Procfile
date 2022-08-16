@@ -1,1 +1,1 @@
-web: npx sequelize db:migrate &&  node --experimental-modules --es-module-specifier-resolution=node
+web: npx sequelize db:migrate && node --experimental-specifier-resolution=node src/app.js
