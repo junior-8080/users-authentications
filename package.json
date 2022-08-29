@@ -9,7 +9,7 @@
     "migrate:new": "npx sequelize-cli migration:generate --name $1",
     "migrate:up": "npx sequelize db:migrate",
     "migrate:down": "npx sequelize-cli db:migrate:undo",
-    "start": "node --exec babel-node src/app.js",
+    "start": "node babel-node src/app.js",
     "main": "node --exec babel-node src/app.js"
   },
   "jest": {
