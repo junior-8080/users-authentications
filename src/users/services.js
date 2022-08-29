@@ -1,7 +1,10 @@
-import { userApiKeys } from "../../models/userApikeys.js";
-import { User } from "../../models/users.js";
+import UserApiKey  from "../../models/userApikeys.js";
+import  Users  from "../../models/users.js";
 import { Errors, hashPassword } from "../utils/utils.js";
 import { createPersonSchema, updatePersonSchema } from "./schemas.js";
+import db, { Sequelize } from '../../models/index'
+const userApiKey  = UserApiKey(db.sequelize,Sequelize.DataTypes);
+const User = Users(db.sequelize,db.Sequelize.DataTypes)
 
 export const createUser = async (payload) => {
   // validate data.
@@ -37,13 +40,10 @@ export const createUser = async (payload) => {
     const hashedPasword = await hashPassword(payload.password);
     payload.password = hashedPasword;
     payload.status = "A";
+    payload.apiKey = payload.apiKey;
     const { dataValues } = await User.create(payload);
-    const userApiKeyPayload = {
-      userId: dataValues.id,
-      apiKey: payload.apiKey,
-    };
-    const user_account = await userApiKeys.create(userApiKeyPayload);
     delete dataValues.password;
+    delete dataValues.apiKey;
     payloadRes = {
       code: "SUCCESS",
       data: dataValues,
@@ -108,14 +108,21 @@ export const updateUser = async (payload) => {
   }
 };
 
-export const retrieveUsers = (data) => {
-  // get query.
-  // generate  query.
-  // fetch users.
-};
 
-export const retrieveUser = (data) => {
+
+export const retrieveUsers = async (data) => {
   // get query.
   // generate  query.
   // fetch users.
+  try{
+    const users =  await User.findAll({where:{apiKey:data.key},attributes:{exclude:['password','apiKey']},raw:true});
+    const payloadRes = {
+      code: "SUCCESS",
+      message:"success",
+      data: users,
+    }
+    return payloadRes;
+  }catch(error){
+    return error;
+  }
 };

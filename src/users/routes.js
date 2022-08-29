@@ -6,7 +6,6 @@ const router = express.Router();
 router.post('/',authorize,saveUser);
 router.put('/',authorize,editUserDetails);
 router.get('/',authorize,fetchUsers);
-router.get('/:userId',authorize,fetchUser);
 
 
 

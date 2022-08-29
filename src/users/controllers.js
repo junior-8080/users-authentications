@@ -1,8 +1,9 @@
 import * as api from "../utils/api.js";
-import {createUser,updateUser } from "./services.js";
+import { createUser, updateUser, retrieveUsers } from "./services.js";
 
 export const saveUser = (req, res) => {
   const data = req.body;
+ data.apiKey = req.user.key;  
   createUser(data)
     .then((response) => api.success(res, response))
     .catch((err) => {
@@ -19,6 +20,11 @@ export const editUserDetails = (req, res) => {
     });
 };
 
-export const fetchUsers = (req, res) => {};
-
-export const fetchUser = (req, res) => {};
+export const fetchUsers = (req, res) => {
+  const data = {
+    key: req.user.key
+  }
+  retrieveUsers(data)
+    .then((response) => api.success(res, response))
+    .catch((err) => api.serverErrors(res, err));
+};

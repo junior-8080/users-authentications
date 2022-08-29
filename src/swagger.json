@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "title": "Blog Api.",
+    "title": "Authentication Users",
     "description": "This is api-serivce that provides service of blog post",
     "contact": {
       "name": "Abdul Mukhsin",
@@ -22,15 +22,8 @@
     }
   ],
   "components": {
-    "securitySchemes": {
-      "accessAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "x-access-token"
-      } 
-    },
     "schemas": {
-      "Login": {
+      "userAuthReq": {
         "required": ["username", "password"],
         "properties": {
           "username": {
@@ -43,7 +36,53 @@
           }
         }
       },
-      "getPOST": {
+      "userAuthRes": {
+        "properties": {
+          "statusCode": {
+            "type": "integer"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "token": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string"
+              },
+              "createdAt": {
+                "type": "string"
+              },
+              "updatedAt": {
+                "type": "string"
+              },
+              "user": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "username": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "phonenumber": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "getUsersRes": {
         "properties": {
           "statusCode": {
             "type": "integer"
@@ -62,179 +101,113 @@
                 "dateCreated": {
                   "type": "string"
                 },
-                "_id": {
+                "updatedAt": {
                   "type": "string"
                 },
-                "title": {
+                "id": {
                   "type": "string"
                 },
-                "description": {
-                  "type": "string"
-                },
-                "body": {
-                  "type": "string"
-                },
-                "userId": {
-                  "type": "string"
-                },
-                "author": {
+                "data": {
                   "type": "object",
                   "properties": {
-                    "_id": {
+                    "username": {
                       "type": "string"
                     },
-                    "twitter": {
+                    "email": {
                       "type": "string"
                     },
-                    "instagram": {
+                    "phonenumber": {
                       "type": "string"
                     }
                   }
                 }
               }
             }
-          },
-          "status": {
-            "type": "string"
           }
         }
       },
-      "createPost": {
-        "required": ["title", "description", "body"],
+      "createUsersReq": {
+        "required": ["password", "data"],
         "properties": {
-          "title": {
+          "required": ["username", "email"],
+          "password": {
             "type": "string",
-            "example": "JavaScript Variables II"
-          },
-          "description": {
-            "type": "string",
-            "example": "Variables are containers for storing data (storing data values).In this example, x, y, and z, are variables, declared with the var keyword"
-          },
-          "body": {
-            "type": "string",
-            "example": "The two variables price1 and price2 are declared with the const keywordd.These are constant values and cannot be changed.The variable total declared with the let keyword.This is a value that can be changed.The two variables price1 and price2 are declared with the const keywordd."
-          }
-        }
-      },
-      "createPostResponse": {
-        "properties": {
-          "statusCode": {
-            "type": "integer"
-          },
-          "message": {
-            "type": "string"
+            "example": "qwerty123"
           },
           "data": {
             "type": "object",
             "properties": {
-              "id": {
-                "type": "string"
+              "username": {
+                "type": "string",
+                "example": "abdul580"
+              },
+              "email": {
+                "type": "string",
+                "example": "johndoe@mailinator.com"
               }
             }
-          },
-          "status": {
-            "type": "string"
           }
         }
       },
-      "id": {
-        "type": "string",
-        "example": "62c2c19cdcf055004e427e2e"
+      "createUsersRes": {
+        "properties": {
+          "statusCode": {
+            "type": "integer"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "createdAt": {
+                "type": "string",
+                "example": "2022-08-29T02:46:43.699Z"
+              },
+              "updatedAt": {
+                "type": "string",
+                "example": "2022-08-29T02:46:43.704Z"
+              },
+              "id": {
+                "type": "string",
+                "example": "******-****-****-********"
+              },
+              "data": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      },
+      "updateUsersReq": {
+        "required": ["data"],
+        "properties": {
+          "data": {
+            "required": ["username", "email"],
+            "properties": {
+              "username": {
+                "type": "string",
+                "example": "abdul580"
+              },
+              "email": {
+                "type": "string",
+                "example": "johndoe@mailinator.com"
+              }
+            }
+          }
+        }
       }
     }
   },
   "paths": {
-    "/login": {
-      "post": {
-        "tags": ["Login"],
-        "parameters": [],
-        "requestBody": {
-          "description": "login to get token",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Login"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "user details with token.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "statusCode": {
-                    "type": "interger"
-                  },
-                  "message": {
-                    "type": "string"
-                  },
-                  "data": {
-                    "token": {
-                      "type": "string"
-                    },
-                    "user": {
-                      "userId": {
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "email": {
-                        "type": "string",
-                        "formart": "email"
-                      },
-                      "twitter": {
-                        "type": "string"
-                      },
-                      "instagram": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "status": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "response for invalid credentials.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "statusCode": {
-                    "type": "interger",
-                    "exmaple": 401
-                  },
-                  "message": {
-                    "type": "string",
-                    "example": "Invalid Username or Password"
-                  },
-                  "status": {
-                    "type": "string",
-                    "example": "UNAUTHORIZED"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/posts": {
+    "/users": {
       "get": {
-        "tags": ["Posts"],
-        "description": "get all post",
+        "tags": ["Users"],
+        "description": "get all users.",
         "responses": {
           "200": {
-            "description": "A list of post.",
+            "description": "payload for users",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#components/schemas/getPOST"
+                  "$ref": "#components/schemas/getUsersRes"
                 }
               }
             }
@@ -242,14 +215,14 @@
         }
       },
       "post": {
-        "tags": ["Posts"],
+        "tags": ["Users"],
         "parameters": [],
         "requestBody": {
-          "description": "login to get token",
+          "description": "create users via token.",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/createPost"
+                "$ref": "#/components/schemas/createUsersReq"
               }
             }
           }
@@ -260,28 +233,33 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/createPostResponse"
+                  "$ref": "#/components/schemas/createUsersRes"
                 }
               }
             }
-          },
-          "401": {
-            "description": "response for invalid credentials.",
+          }
+        }
+      },
+      "put": {
+        "tags": ["Users"],
+        "parameters": [],
+        "requestBody": {
+          "description": "create users via token.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/updateUsersReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "user details with token.",
             "content": {
               "application/json": {
                 "schema": {
-                  "statusCode": {
-                    "type": "interger",
-                    "exmaple": 401
-                  },
-                  "message": {
-                    "type": "string",
-                    "example": "Invalid Username or Password"
-                  },
-                  "status": {
-                    "type": "string",
-                    "example": "UNAUTHORIZED"
-                  }
+                  "$ref": "#/components/schemas/createUsers"
                 }
               }
             }
@@ -289,29 +267,27 @@
         }
       }
     },
-    "/users/{userId}/posts": {
-      "get": {
-        "security:":[{
-          "accessAuth":[]
-        }],
-        "tags": ["Posts"],
-        "parameters": [
-          {
-            "name": "userId",
-            "in": "path",
-            "schema": {
-              "$ref": "#/components/schemas/id"
-            },
-            "required": true
+    "/auth": {
+      "post": {
+        "tags": ["Users Auth"],
+        "parameters": [],
+        "requestBody": {
+          "description": "user login via email or password.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/userAuthReq"
+              }
+            }
           }
-        ],
-        "description": "get a users posts",
+        },
         "responses": {
           "200": {
+            "description": "user details with token.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#components/schemas/getPOST"
+                  "$ref": "#/components/schemas/userAuthRes"
                 }
               }
             }

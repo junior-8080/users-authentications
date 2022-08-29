@@ -9,9 +9,8 @@ import { dbInit } from './utils/dbconnection.js';
 import users from './users/routes.js';
 import auth from './auth/route.js';
 import morgan from 'morgan';
-// import {logger }from './logs/logger.js';
 import swaggerUI from 'swagger-ui-express';
-import swaggerDocument  from "./swagger.json";
+import swaggerDocument  from "./swagger.json" assert {type:"json"};
 
 
 // database initialization.

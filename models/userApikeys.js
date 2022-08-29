@@ -1,21 +1,27 @@
-import { Sequelize, DataTypes } from "sequelize";
-import {sequelize} from "../src/utils/dbconnection.js"
-
-export const userApiKeys =
-sequelize.define("userApikeys", {
-  userId: {
-    type: DataTypes.UUID,
-    references: {
-      model: {
-        tableName: "users",
-        schema: "schema",
+module.exports =  (sequelize, DataTypes) => {
+  const userApiKey =  sequelize.define(
+    "users_apikeys",
+    {
+      userId: {
+        type: DataTypes.UUID,
+        references: {
+          model: {
+            tableName: "users",
+            schema: "schema",
+          },
+          key: "id",
+        },
+        allowNull: false,
       },
-      key: "id",
+      apiKey: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
     },
-    allowNull: false,
-  },
-  apiKey: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-});
+    {
+      freezeTableName: true,
+    }
+  );
+  return userApiKey;
+};
+
