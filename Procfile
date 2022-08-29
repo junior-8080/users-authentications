@@ -1,1 +1,1 @@
-web: npx sequelize db:migrate && node --exec babel-node ./src/app.js
+web: npx sequelize db:migrate && node  babel-node ./src/app.js
